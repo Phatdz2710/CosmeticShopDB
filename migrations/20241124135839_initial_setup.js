@@ -1,20 +1,20 @@
 exports.up = async function(knex) {
 
-    await knex.schema.createTable('accounts', (table) => {
-        table.increments('id').primary();
-        table.string('username', 50).notNullable();
-        table.string('password', 50).notNullable();
-        table.string('role', 50).notNullable().defaultTo('User');
-        table.string('token', 50).notNullable();
-    });
-
     await knex.schema.createTable('users', (table) => {
         table.increments('id').primary();
         table.string('name', 50).notNullable();
         table.string('email', 50).nullable();
         table.string('phone', 50).nullable();
         table.string('address', 50).nullable();
-        table.integer('account_id').notNullable().references('accounts.id');
+    });
+
+    await knex.schema.createTable('accounts', (table) => {
+        table.increments('id').primary();
+        table.string('username', 50).notNullable();
+        table.string('password', 50).notNullable();
+        table.string('role', 50).notNullable().defaultTo('User');
+        table.string('token', 50).notNullable();
+        table.integer('user_id').notNullable().references('users.id');
     });
        
 
@@ -103,7 +103,7 @@ exports.down = async function(knex) {
     await knex.schema.dropTableIfExists('order_items');
     await knex.schema.dropTableIfExists('orders');
     await knex.schema.dropTableIfExists('products');
-    await knex.schema.dropTableIfExists('users');
     await knex.schema.dropTableIfExists('accounts');
+    await knex.schema.dropTableIfExists('users');
     
 };

@@ -11,15 +11,13 @@ exports.seed = async function(knex) {
       email: 'admin@gmail.com',
       phone: '0123456789',
       address: "Viet Nam",
-      account_id: 1,
     },
 
     {
       name: 'Ngọc Phát',
       email: 'ngocphatc2710@gmail.com',
       phone: '035432134',
-      address: "Binh Phuoc",  
-      account_id: 2
+      address: "Binh Phuoc",
     },
     
   ]);
