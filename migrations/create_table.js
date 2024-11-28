@@ -6,6 +6,7 @@ exports.up = async function(knex) {
         table.string('email', 50).nullable();
         table.string('phone', 50).nullable();
         table.string('address', 50).nullable();
+        table.string('avatar_path', 200).nullable();
     });
 
     await knex.schema.createTable('accounts', (table) => {
