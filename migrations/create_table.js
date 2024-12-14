@@ -34,14 +34,26 @@ exports.up = async function(knex) {
         table.float('average_rating').notNullable().defaultTo(0);
     });
 
+    
+    await knex.schema.createTable('vouchers', (table) => {
+        table.increments('id').primary();
+        table.string('code', 50).notNullable();
+        table.decimal('discount_amount').notNullable();
+        table.decimal('percentage_discount').notNullable();
+        table.string('description', 1000).nullable();
+        table.datetime('valid_from').notNullable();
+        table.datetime('valid_to').notNullable();
+        table.boolean('is_active').notNullable().defaultTo(true);
+    });
+
     await knex.schema.createTable('orders', (table) => {
         table.increments('id').primary();
         table.integer('user_id').notNullable().references('users.id');
-        table.boolean('is_approved').notNullable().defaultTo(false);
-        table.string('order_status', 50).notNullable();
+        table.integer('order_status').notNullable().defaultTo(0);
         table.datetime('order_date').notNullable();
         table.integer('payment_method').notNullable();
         table.integer('shipping_method').notNullable();
+        table.integer('voucher_id').nullable().references('vouchers.id');
     });
 
     await knex.schema.createTable('order_items', (table) => {
@@ -54,11 +66,6 @@ exports.up = async function(knex) {
     await knex.schema.createTable('carts', (table) => {
         table.increments('id').primary();
         table.integer('user_id').notNullable().references('users.id');
-    });
-
-    await knex.schema.createTable('cart_items', (table) => {
-        table.increments('id').primary();
-        table.integer('cart_id').notNullable().references('carts.id');
         table.integer('product_id').notNullable().references('products.id');
         table.integer('quantity').notNullable();
     });
@@ -74,16 +81,6 @@ exports.up = async function(knex) {
         table.decimal('shipping_cost').notNullable();
     });
 
-    await knex.schema.createTable('vouchers', (table) => {
-        table.increments('id').primary();
-        table.string('code', 50).notNullable();
-        table.decimal('discount_amount').notNullable();
-        table.decimal('percentage_discount').notNullable();
-        table.string('description', 1000).nullable();
-        table.datetime('valid_from').notNullable();
-        table.datetime('valid_to').notNullable();
-        table.boolean('is_active').notNullable().defaultTo(true);
-    });
 
     await knex.schema.createTable('product_ratings', (table) => {
         table.increments('id').primary();
@@ -96,15 +93,13 @@ exports.up = async function(knex) {
 
 exports.down = async function(knex) {
     await knex.schema.dropTableIfExists('product_ratings');
-    await knex.schema.dropTableIfExists('vouchers');
     await knex.schema.dropTableIfExists('shipping_methods');
     await knex.schema.dropTableIfExists('payment_methods');
-    await knex.schema.dropTableIfExists('cart_items');
     await knex.schema.dropTableIfExists('carts');
     await knex.schema.dropTableIfExists('order_items');
     await knex.schema.dropTableIfExists('orders');
+    await knex.schema.dropTableIfExists('vouchers');
     await knex.schema.dropTableIfExists('products');
     await knex.schema.dropTableIfExists('accounts');
     await knex.schema.dropTableIfExists('users');
-    
 };
