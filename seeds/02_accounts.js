@@ -10,5 +10,7 @@ exports.seed = async function(knex) {
   await knex('accounts').insert([
     {username: 'admin', password: '123', role: 'Admin', token: 'fhsdkfhsjfhsfkshf', user_id: 1},
     {username: 'ngocphat', password: '123', role: 'User', token: 'fhsf87fshbsbfufs', user_id: 2},
+    {username: 'cnp', password: '123', role: 'User', token: 'fhsf87fshbsbfufs', user_id: 3},
+    {username: 'thanh', password: '123', role: 'User', token: 'fhsf87fshbsbfufs', user_id: 4},
   ]);
 };

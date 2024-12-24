@@ -32,6 +32,7 @@ exports.up = async function(knex) {
         table.string('image_path', 200).nullable();
         table.string('image_thumbnail_path', 200).nullable();
         table.float('average_rating').notNullable().defaultTo(0);
+        table.integer('num_review').notNullable().defaultTo(0);
     });
 
     
@@ -86,7 +87,7 @@ exports.up = async function(knex) {
         table.increments('id').primary();
         table.integer('user_id').notNullable().references('users.id');
         table.integer('product_id').notNullable().references('products.id');
-        table.integer('rating').notNullable();
+        table.integer('rating').notNullable().defaultTo(0);
         table.datetime('rating_date').notNullable();
     });
 };

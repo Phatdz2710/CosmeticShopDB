@@ -19,6 +19,22 @@ exports.seed = async function(knex) {
       phone: '035432134',
       address: "Binh Phuoc",
     },
+
+    {
+      name: 'CNP',
+      email: 'cnp@gmail.com',
+      phone: '035432134',
+      address: "Binh Phuoc",
+    },
+
+    {
+      name: 'Thanh',
+      email: 'thanh123@gmail.com',
+      phone: '035432134',
+      address: "Binh Phuoc",
+    },
+
+
     
   ]);
 };
