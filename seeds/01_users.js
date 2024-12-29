@@ -11,6 +11,7 @@ exports.seed = async function(knex) {
       email: 'admin@gmail.com',
       phone: '0123456789',
       address: "Viet Nam",
+      create_time: new Date(),
     },
 
     {
@@ -18,6 +19,7 @@ exports.seed = async function(knex) {
       email: 'ngocphatc2710@gmail.com',
       phone: '035432134',
       address: "Binh Phuoc",
+      create_time: new Date(),
     },
 
     {
@@ -25,6 +27,7 @@ exports.seed = async function(knex) {
       email: 'cnp@gmail.com',
       phone: '035432134',
       address: "Binh Phuoc",
+      create_time: new Date(),
     },
 
     {
@@ -32,9 +35,7 @@ exports.seed = async function(knex) {
       email: 'thanh123@gmail.com',
       phone: '035432134',
       address: "Binh Phuoc",
+      create_time: new Date(),
     },
-
-
-    
   ]);
 };

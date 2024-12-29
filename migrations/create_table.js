@@ -6,6 +6,7 @@ exports.up = async function(knex) {
         table.string('email', 50).nullable();
         table.string('phone', 50).nullable();
         table.string('address', 50).nullable();
+        table.datetime('create_time').notNullable();
         table.string('avatar_path', 200).nullable();
     });
 
@@ -52,6 +53,7 @@ exports.up = async function(knex) {
         table.integer('user_id').notNullable().references('users.id');
         table.integer('order_status').notNullable().defaultTo(0);
         table.datetime('order_date').notNullable();
+        table.string('shipping_address', 100).notNullable();
         table.integer('payment_method').notNullable();
         table.integer('shipping_method').notNullable();
         table.integer('voucher_id').nullable().references('vouchers.id');
