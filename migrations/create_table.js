@@ -57,6 +57,7 @@ exports.up = async function(knex) {
         table.integer('payment_method').notNullable();
         table.integer('shipping_method').notNullable();
         table.integer('voucher_id').nullable().references('vouchers.id');
+        table.integer('total_price').notNullable().defaultTo(0);
     });
 
     await knex.schema.createTable('order_items', (table) => {
